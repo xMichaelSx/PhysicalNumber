@@ -108,27 +108,27 @@ using namespace ariel;
         PhysicalNumber& PhysicalNumber::operator-=(const PhysicalNumber& pn) 
         {
               PhysicalNumber newPN;
-        //    if (unit.isSame(pn.unit))
-        //    {
-        //        number-=pn.number;
-        //    }
-        //    else if (unit.isSameGroup(pn.unit))
-        //    {
-        //        newPN=convert(pn);
-        //        number-=newPN.number;
-        //    }
-        //    else
-        //    {
-        //        throw "units are not the same dimensions in -= function";
-        //    }
-           return newPN;
+           if (unit.isSame(pn.unit))
+           {
+               number-=pn.number;
+           }
+           else if (unit.isSameGroup(pn.unit))
+           {
+               newPN=convert(pn);
+               number-=newPN.number;
+           }
+           else
+           {
+               throw "units are not the same dimensions in -= function";
+           }
+           return *this;
         }
         PhysicalNumber PhysicalNumber::operator-() const
         {
             PhysicalNumber a;
             
-            // a.number=number*(-1);
-            // a.unit=unit;
+            a.number=number*(-1);
+            a.unit=unit;
 
            
             return a;
@@ -136,108 +136,107 @@ using namespace ariel;
         }
         PhysicalNumber& PhysicalNumber::operator--()
         {
-            // this->number=this->number-1;
+            this->number=this->number-1;
             return *this;
         }
         PhysicalNumber& PhysicalNumber::operator--(int)
         {
-            // number--;
+            number--;
             return *this;
         }
         
         bool PhysicalNumber::operator<(const PhysicalNumber& pn) const
         {
             
-            // bool test=false;
-            // if(unit.isSame(pn.unit))
-            // {
-            //     if(this->number<pn.number)
-            //         return true;
-            //     else
-            //         return false;
-            // }
-            // else if (unit.isSameGroup(pn.unit))
-            //     return number<convert(pn).number? true : false ; // need to delete?
-            // else 
-            //     throw "the physical numbers are not the same dimension at function < \n";
-            return true;
+            bool test=false;
+            if(unit.isSame(pn.unit))
+            {
+                if(this->number<pn.number)
+                    return true;
+                else
+                    return false;
+            }
+            else if (unit.isSameGroup(pn.unit))
+                return number<convert(pn).number? true : false ; // need to delete?
+            else 
+                throw "the physical numbers are not the same dimension at function < \n";
         }
         bool  PhysicalNumber::operator>(const PhysicalNumber& pn) const
         {
-            //   bool test=false;
-            // if(unit.isSame(pn.unit))
-            // {
-            //     if(this->number>pn.number)
-            //         return true;
-            //     else
+              bool test=false;
+            if(unit.isSame(pn.unit))
+            {
+                if(this->number>pn.number)
+                    return true;
+                else
                     return false;
-            // }
-            // else if (unit.isSameGroup(pn.unit))
-            //     return number>convert(pn).number? true : false ; // need to delete?
-            // else 
-            //     throw "the physical numbers are not the same dimension at function < \n";
+            }
+            else if (unit.isSameGroup(pn.unit))
+                return number>convert(pn).number? true : false ; // need to delete?
+            else 
+                throw "the physical numbers are not the same dimension at function < \n";
         }   
         bool  PhysicalNumber::operator<=(const PhysicalNumber& pn) const
         {
-            //  bool test=false;
-            // if(unit.isSame(pn.unit))
-            // {
-            //     if(this->number<=pn.number)
+             bool test=false;
+            if(unit.isSame(pn.unit))
+            {
+                if(this->number<=pn.number)
                     return true;
-            //     else
-            //         return false;
-            // }
-            // else if (unit.isSameGroup(pn.unit))
-            //     return number<=convert(pn).number? true : false ; // need to delete?
-            // else 
-            //     throw "the physical numbers are not the same dimension at function < \n";
+                else
+                    return false;
+            }
+            else if (unit.isSameGroup(pn.unit))
+                return number<=convert(pn).number? true : false ; // need to delete?
+            else 
+                throw "the physical numbers are not the same dimension at function < \n";
         }
         bool  PhysicalNumber::operator>=(const PhysicalNumber& pn) const
 
         {
-            //  bool test=false;
-            // if(unit.isSame(pn.unit))
-            // {
-            //     if(this->number>=pn.number)
+             bool test=false;
+            if(unit.isSame(pn.unit))
+            {
+                if(this->number>=pn.number)
                     return true;
-            //     else
-            //         return false;
-            // }
-            // else if (unit.isSameGroup(pn.unit))
-            //     return number>=convert(pn).number? true : false ; // need to delete?
-            // else 
-            //     throw "the physical numbers are not the same dimension at function < \n";
+                else
+                    return false;
+            }
+            else if (unit.isSameGroup(pn.unit))
+                return number>=convert(pn).number? true : false ; // need to delete?
+            else 
+                throw "the physical numbers are not the same dimension at function < \n";
               
         }
         bool  PhysicalNumber::operator==(const PhysicalNumber& pn) const
         {
-            // bool test=false;
-            // if(unit.isSame(pn.unit))
-            // {
-            //     if(this->number==pn.number)
-            //         return true;
-            //     else
+            bool test=false;
+            if(unit.isSame(pn.unit))
+            {
+                if(this->number==pn.number)
+                    return true;
+                else
                     return false;
-            // }
-            // else if (unit.isSameGroup(pn.unit))
-            //     return number==convert(pn).number? true : false ; // need to delete?
-            // else 
-            //     throw "the physical numbers are not the same dimension at function < \n";
+            }
+            else if (unit.isSameGroup(pn.unit))
+                return number==convert(pn).number? true : false ; // need to delete?
+            else 
+                throw "the physical numbers are not the same dimension at function < \n";
         }
         bool  PhysicalNumber::operator!=(const PhysicalNumber& pn) const
         {
-            //      bool test=false;
-            // if(unit.isSame(pn.unit))
-            // {
-            //     if(this->number!=pn.number)
+                 bool test=false;
+            if(unit.isSame(pn.unit))
+            {
+                if(this->number!=pn.number)
                     return true;
-            //     else
-            //         return false;
-            // }
-            // else if (unit.isSameGroup(pn.unit))
-            //     return number!=convert(pn).number? true : false ; // need to delete?
-            // else 
-            //     throw "the physical numbers are not the same dimension at function < \n";
+                else
+                    return false;
+            }
+            else if (unit.isSameGroup(pn.unit))
+                return number!=convert(pn).number? true : false ; // need to delete?
+            else 
+                throw "the physical numbers are not the same dimension at function < \n";
         }
 
     //     ostream& ariel::operator<<(ostream& os, PhysicalNumber const & pn){
